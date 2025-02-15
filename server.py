@@ -11,5 +11,10 @@ def render(url,title="null"):
 def home():
     return render("Home.html",title="Fulltanksa - Home")
 
+@app.route("/book-appointment")
+def appointment():
+    return render("Appointment.html",title="Fulltanksa - Home")
+
+
 if __name__ == "__main__":
     app.run( host='0.0.0.0', port=8765, debug=True)
