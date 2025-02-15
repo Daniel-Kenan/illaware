@@ -15,6 +15,10 @@ def home():
 def appointment():
     return render("Appointment.html",title="Fulltanksa - Home")
 
+@app.route("/contact")
+def contactus():
+    return render("Contact.html",title="Fulltanksa - Home")
+
 
 if __name__ == "__main__":
     app.run( host='0.0.0.0', port=8765, debug=True)
