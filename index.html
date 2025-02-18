@@ -716,7 +716,7 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" style="display:none"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -732,6 +732,68 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Create the image element for the NDIS logo
+  const logo = document.createElement("img");
+  logo.src = "/static/ndis.png"; // Change this path to your actual logo file
+  logo.alt = "NDIS Logo";
+  logo.id = "ndis-logo";
+
+  // Apply initial CSS styles via JavaScript
+  Object.assign(logo.style, {
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    width: "60px", // Adjust size as needed
+    cursor: "pointer",
+    zIndex: "1000",
+    transition: "transform 0.3s ease-in-out"
+  });
+
+  // Append the logo to the body
+  document.body.appendChild(logo);
+
+  // Add hover effect (zoom in)
+  logo.addEventListener("mouseover", () => {
+    logo.style.transform = "scale(1.1)";
+  });
+  logo.addEventListener("mouseout", () => {
+    logo.style.transform = "scale(1)";
+  });
+
+  // Variables for draggable functionality
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  // Start dragging on mousedown
+  logo.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    // Calculate the offset between mouse pointer and logo's top-left corner
+    offsetX = e.clientX - logo.getBoundingClientRect().left;
+    offsetY = e.clientY - logo.getBoundingClientRect().top;
+    logo.style.cursor = "grabbing";
+    // Switch to absolute positioning for dragging
+    logo.style.position = "absolute";
+  });
+
+  // Update logo position while dragging
+  document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+      logo.style.left = (e.clientX - offsetX) + "px";
+      logo.style.top = (e.clientY - offsetY) + "px";
+    }
+  });
+
+  // Stop dragging on mouseup
+  document.addEventListener("mouseup", () => {
+    if (isDragging) {
+      isDragging = false;
+      logo.style.cursor = "pointer";
+    }
+  });
+});
+
 
 </body>
 
